@@ -1,0 +1,28 @@
+<div id="content" class="<%= show_content_classes %>">
+	<p>blacklight-catalog-show</p>
+  <%= render_document_main_content_partial %>
+  
+  <%= render :partial => "spotlight/shared/hidden_fields" %>
+  <% page_number = 0
+  @docs.each do |page| %>
+	  <div class="page" id="page_<%= page_number %>" style="display: none;">
+		  <% document_show_fields(page).each do |field_name, field| -%>
+			<% if should_render_show_field? page, field %>
+				<dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label page, field: field_name %></dt>
+				<dd class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_value page, field: field_name %></dd>
+				<!-- show field_name <%= field_name %>-->
+			<% else %>
+			<!-- dont show field_name <%= field_name %> -->
+			<% end -%>
+		  <% end -%>
+	  </div>
+  <%page_number += 1 
+  	end %>
+  
+  <dt>Access and Use Rights: </dt><dd>Rights info goes here</dd>
+  
+</div>
+
+<div id="sidebar" class="<%= show_sidebar_classes %>">
+   <%= render_document_sidebar_partial %>
+</div>

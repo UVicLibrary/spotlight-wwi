@@ -1,0 +1,12 @@
+<% image = document.to_openseadragon(blacklight_config.view_config(:show)) %>
+
+<% unless image.nil? %>
+<div class="osd-image row">
+	<% image.each do |value| %>
+		<%= document._source[:id] %>
+		<% key = value.first.first.to_tilesource[:levels].first[:url].split('url/').last.split('.').first.gsub('/', '-') %>
+    	<%= link_to (image_tag "http://ophelia.library.uvic.ca/spotlight/#{params[:exhibit_id]}/iiif-service/#{key}/full/400,/0/default.jpg"), "/spotlight/#{params[:exhibit_id]}/catalog/#{document._source[:id]}" %>
+    <% end %>
+  </div>
+
+<% end %>

@@ -1,0 +1,6 @@
+<% if((document.sidecar(document.id).data["configured_fields"].key? "items") && (document.sidecar(document.id).data["configured_fields"]["items"].length > 0)) %>
+	<%= link_to "Edit Compound Object", {controller: "compounds", id: document._source["id"], action: "edit"} , class: 'pull-right btn btn-primary' if can?(:curate, current_exhibit) and !current_page? [:edit, current_exhibit, document]  %>
+<% else %>
+	<%= exhibit_edit_link document, [:edit, current_exhibit, document], class: 'pull-right btn btn-primary' if can?(:curate, current_exhibit) and !current_page? [:edit, current_exhibit, document]  %>
+	<%= link_to "Annotate", {controller: "catalog", id: document._source["id"], action: "show_annotation"} , class: 'pull-right btn btn-primary' if can?(:curate, current_exhibit) and !current_page? [:edit, current_exhibit, document]  %>
+<% end %>
